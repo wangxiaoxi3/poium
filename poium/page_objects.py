@@ -66,6 +66,12 @@ class PageObject(object):
         self.driver.get(root_uri + uri)
         self.driver.implicitly_wait(5)
 
+    def set_cookie(self, cookies):
+        """
+        :param cookies: cookies
+        """
+        self.driver.add_cookie(cookie_dict=cookies)
+
 
 class Element(object):
     """
@@ -213,6 +219,14 @@ class Element(object):
                 pass
 
         return elem
+
+    def screenshot(self, img):
+        """
+        Simulates typing into the element.
+        """
+        elem = self.__get_element(self.k, self.v)
+        logging.info("🖋 screenshot element: {}".format(self.desc))
+        elem.screenshot(img)
 
     def clear(self):
         """Clears the text if it's a text entry element."""
